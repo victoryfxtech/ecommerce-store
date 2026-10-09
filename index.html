@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Luma Store - Modern Essentials</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <header>
+    <nav class="nav">
+      <a class="logo" href="#">LUMA</a>
+      
+      <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      
+      <div class="nav-overlay"></div>
+      <div class="nav-menu">
+        <a href="#shop">Shop</a>
+        <a href="#story">Our Story</a>
+      </div>
+      
+      <div class="nav-actions">
+        <button class="search-toggle" aria-label="Search products">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="8" cy="8" r="6"></circle>
+            <path d="M14 14l4 4"></path>
+          </svg>
+        </button>
+        <button class="cart-btn" onclick="toggleCart()" aria-label="Shopping cart">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="6" cy="18" r="1"></circle>
+            <circle cx="16" cy="18" r="1"></circle>
+            <path d="M1 1h4l2 12h11l2-7H7"></path>
+          </svg>
+          <span class="cart-count" id="count">0</span>
+        </button>
+        <button class="wishlist-btn" onclick="toggleWishlist()" aria-label="Wishlist">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M10 18l-8-6C.5 10 0 7.5 0 5c0-3.3 2.7-6 6-6 1.8 0 3.5.8 4.6 2 1.1-1.2 2.8-2 4.4-2 3.3 0 6 2.7 6 6 0 2.5-.5 5-2 7l-8 6z"></path>
+          </svg>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Search Bar -->
+    <div class="search-bar" id="searchBar">
+      <input type="text" id="searchInput" placeholder="Search products..." autocomplete="off">
+      <button class="search-close" onclick="closeSearch()">&times;</button>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <p class="hero-label">NEW SEASON 2026</p>
+      <h1>Modern essentials for everyday living.</h1>
+      <p class="hero-desc">Thoughtfully curated products designed for quality and simplicity.</p>
+      <a href="#shop" class="btn btn-primary">Shop Collection</a>
+    </div>
+  </section>
+
+  <!-- Shop Section -->
+  <section id="shop" class="shop">
+    <div class="section-head">
+      <div>
+        <p class="section-label">CURATED FOR YOU</p>
+        <h2>Featured Products</h2>
+      </div>
+      
+      <div class="controls">
+        <select id="sortSelect" onchange="sortProducts()">
+          <option value="newest">Newest</option>
+          <option value="price-low">Price: Low to High</option>
+          <option value="price-high">Price: High to Low</option>
+          <option value="name">Name A-Z</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="filters">
+      <button class="filter-btn active" onclick="filter('all')">All</button>
+      <button class="filter-btn" onclick="filter('home')">Home</button>
+      <button class="filter-btn" onclick="filter('fashion')">Fashion</button>
+      <button class="filter-btn" onclick="filter('decor')">Decor</button>
+    </div>
+
+    <div id="products" class="products"></div>
+  </section>
+
+  <!-- Story Section -->
+  <section id="story" class="story">
+    <div class="story-content">
+      <h2>Designed with intention.</h2>
+      <p>Luma curates modern essentials that blend form and function. Each product is selected for its quality, design, and ability to enhance everyday life. We believe in simplicity, sustainability, and making beautiful things accessible.</p>
+      <div class="story-stats">
+        <div class="stat">
+          <strong>500+</strong>
+          <span>Curated Products</span>
+        </div>
+        <div class="stat">
+          <strong>98%</strong>
+          <span>Customer Satisfaction</span>
+        </div>
+        <div class="stat">
+          <strong>Free Shipping</strong>
+          <span>On Orders Over $50</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cart Drawer -->
+  <aside id="drawer" class="cart-drawer">
+    <button class="cart-close" onclick="toggleCart()">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+    <h2>Your Cart</h2>
+    <div id="cart" class="cart-items"></div>
+    <div class="cart-summary">
+      <div class="total">
+        <span>Subtotal:</span>
+        <strong>$<span id="subtotal">0</span></strong>
+      </div>
+      <div class="shipping">
+        <span>Shipping:</span>
+        <strong id="shippingCost">Free</strong>
+      </div>
+      <div class="cart-total">
+        <span>Total:</span>
+        <strong>$<span id="total">0</span></strong>
+      </div>
+    </div>
+    <button class="checkout-btn" onclick="checkout()">Proceed to Checkout</button>
+    <button class="continue-btn" onclick="toggleCart()">Continue Shopping</button>
+  </aside>
+
+  <!-- Wishlist Drawer -->
+  <aside id="wishlist" class="wishlist-drawer">
+    <button class="wishlist-close" onclick="toggleWishlist()">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+    <h2>Wishlist</h2>
+    <div id="wishlist-items" class="wishlist-items"></div>
+  </aside>
+
+  <!-- Overlay -->
+  <div class="overlay" id="overlay"></div>
+
+  <footer>
+    <p>&copy; 2026 Luma Store • A Modern Lifestyle Concept</p>
+    <p style="font-size: 0.9rem; margin-top: 10px; color: #999;">This is a portfolio project. No real transactions are processed.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
